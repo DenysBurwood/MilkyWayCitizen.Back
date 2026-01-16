@@ -1,0 +1,6 @@
+@MilkyWayCitizen.Back.API_HostAddress = http://localhost:5227
+
+GET {{MilkyWayCitizen.Back.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

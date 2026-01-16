@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36804.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkyWayCitizen.Back.API", "MilkyWayCitizen.Back.API\MilkyWayCitizen.Back.API.csproj", "{6B5161C6-FBCA-40D1-9A60-EF0BFDA87F91}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8B3E4B0-8BBA-4D26-BB21-C296D8E93710} = {B8B3E4B0-8BBA-4D26-BB21-C296D8E93710}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkyWayCitizen.Back.DL", "MilkyWayCitizen.Back.DL\MilkyWayCitizen.Back.DL.csproj", "{78D28116-11EE-4AB8-B96F-BE8210934925}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkyWayCitizen.Back.DAL", "MilkyWayCitizen.Back.DAL\MilkyWayCitizen.Back.DAL.csproj", "{9F41A322-1352-4726-9D3E-C9879A34E45F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkyWayCitizen.Back.BLL", "MilkyWayCitizen.Back.BLL\MilkyWayCitizen.Back.BLL.csproj", "{B8B3E4B0-8BBA-4D26-BB21-C296D8E93710}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F41A322-1352-4726-9D3E-C9879A34E45F} = {9F41A322-1352-4726-9D3E-C9879A34E45F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B5161C6-FBCA-40D1-9A60-EF0BFDA87F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5161C6-FBCA-40D1-9A60-EF0BFDA87F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5161C6-FBCA-40D1-9A60-EF0BFDA87F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5161C6-FBCA-40D1-9A60-EF0BFDA87F91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D28116-11EE-4AB8-B96F-BE8210934925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D28116-11EE-4AB8-B96F-BE8210934925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D28116-11EE-4AB8-B96F-BE8210934925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D28116-11EE-4AB8-B96F-BE8210934925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F41A322-1352-4726-9D3E-C9879A34E45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F41A322-1352-4726-9D3E-C9879A34E45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F41A322-1352-4726-9D3E-C9879A34E45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F41A322-1352-4726-9D3E-C9879A34E45F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B3E4B0-8BBA-4D26-BB21-C296D8E93710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B3E4B0-8BBA-4D26-BB21-C296D8E93710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B3E4B0-8BBA-4D26-BB21-C296D8E93710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B3E4B0-8BBA-4D26-BB21-C296D8E93710}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9EE7100-E9C5-4547-846C-79FF903AB9CB}
+	EndGlobalSection
+EndGlobal
