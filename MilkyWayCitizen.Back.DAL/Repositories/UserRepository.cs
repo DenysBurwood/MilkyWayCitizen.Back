@@ -36,5 +36,9 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
         {
             return _users.FirstOrDefault(y => y.UserName == userName);
         }
+        public User? GetUserById(int id) 
+        {
+            return _users.FirstOrDefault(y => y.Id == id);
+        }
     }
 }

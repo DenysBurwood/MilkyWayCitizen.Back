@@ -24,11 +24,13 @@ builder.Services.AddDbContext<MilkyWayContext>(b =>
 #endregion
 
 #region Repositories
+builder.Services.AddScoped<NewsRepository>();
 builder.Services.AddScoped<UserRepository>();
 #endregion
 
 #region Services
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<NewsService>();
 builder.Services.AddScoped<UserService>();
 #endregion
 
@@ -53,7 +55,21 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
+builder.Services.AddCors(service =>
+{
+    service.AddPolicy("FFA",policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyMethod();
+        policy.AllowAnyHeader();
+    });
+
+    // TODO : Add more CORS policies for production
+});
+
 var app = builder.Build();
+
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -63,6 +79,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("FFA");
 
 app.UseAuthentication();
 

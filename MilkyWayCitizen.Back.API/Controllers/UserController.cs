@@ -20,7 +20,7 @@ namespace MilkyWayCitizen.Back.API.Controllers
             _authService = authService;
         }
         [HttpPost("login")]
-        public ActionResult Login([FromForm] UserLoginFormDTO form) 
+        public ActionResult Login([FromBody] UserLoginFormDTO form) 
         {
             if(form is null)
             {
@@ -32,7 +32,7 @@ namespace MilkyWayCitizen.Back.API.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult Register([FromForm] UserRegisterFormDTO form)
+        public ActionResult Register([FromBody] UserRegisterFormDTO form)
         {
             if(form is null)
             {

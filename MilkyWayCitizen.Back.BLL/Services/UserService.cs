@@ -38,5 +38,10 @@ namespace MilkyWayCitizen.Back.BLL.Services
             }// */
             return user;
         }
+        public User? GetUserById(int id) 
+        {
+            User? user = _userRepository.GetUserById(id);
+            return user;
+        }
     }
 }

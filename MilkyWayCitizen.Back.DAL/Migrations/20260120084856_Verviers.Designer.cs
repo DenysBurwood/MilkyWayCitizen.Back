@@ -12,8 +12,8 @@ using MilkyWayCitizen.Back.DAL.Contexts;
 namespace MilkyWayCitizen.Back.DAL.Migrations
 {
     [DbContext(typeof(MilkyWayContext))]
-    [Migration("20260116143730_init")]
-    partial class init
+    [Migration("20260120084856_Verviers")]
+    partial class Verviers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,48 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pictures")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PublishTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("PK_News");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("News", (string)null);
+                });
 
             modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.User", b =>
                 {
@@ -66,6 +108,22 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("User_", (string)null);
+                });
+
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.News", b =>
+                {
+                    b.HasOne("MilkyWayCitizen.Back.DL.Entities.User", "Author")
+                        .WithMany("PublishedNews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.User", b =>
+                {
+                    b.Navigation("PublishedNews");
                 });
 #pragma warning restore 612, 618
         }
