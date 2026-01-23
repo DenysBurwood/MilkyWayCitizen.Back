@@ -35,7 +35,7 @@ namespace MilkyWayCitizen.Back.API.Controllers
             }
             NewsDetailsDTO newsDetails = news.ToNewsDetailsDTOFromNews();
             Console.WriteLine("UserId : " + newsDetails.AuthorId);
-            Console.WriteLine("Titre : " + newsDetails.Title);
+            Console.WriteLine("Photos : " + newsDetails.Pictures);
             User? author = _userService.GetUserById(news.UserId);
             if(author==null)
             {
@@ -49,6 +49,8 @@ namespace MilkyWayCitizen.Back.API.Controllers
         [HttpPost("add")]
         public ActionResult AddNews([FromBody] NewsFormDTO news) 
         {
+            Console.Write("\nPublishTime : ");
+            Console.WriteLine(news.PublishTime);
             _newsService.AddNews(news.ToNewsFromNewsFormDTO());
             return Ok();
         }

@@ -1,0 +1,23 @@
+﻿using System.Security.Claims;
+
+namespace MilkyWayCitizen.Back.API.Tools
+{
+    public static class UserTools
+    {
+        public static int GetUserID(this ClaimsPrincipal claim)
+        {
+            return int.Parse(claim.FindFirst(ClaimTypes.Sid)!.Value);
+        }
+
+        public static string GetUserEmail(this ClaimsPrincipal claim)
+        {
+            //  We got rid of the email in our claims
+            return claim.FindFirst(ClaimTypes.Email)!.Value;
+        }
+
+        public static string GetRole(this ClaimsPrincipal claim)
+        {
+            return claim.FindFirst(ClaimTypes.Role)!.Value;
+        }
+    }
+}

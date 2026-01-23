@@ -41,7 +41,7 @@ namespace MilkyWayCitizen.Back.API.Mappers
                 PublishTime = news.PublishTime,
                 AuthorId=news.UserId,
                 Tags=news.Tags,
-
+                Pictures=news.Pictures,
             };
         }
     }

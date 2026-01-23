@@ -26,5 +26,21 @@ namespace MilkyWayCitizen.Back.API.Mappers
                 Password = form.Password,
             };
         }
+
+        public static UserDetailsDTO ToUserDetailsDTOFromUser(this User user) 
+        {
+            IEnumerable<char> hidden = [];
+            hidden.Append('*').Append('*').Append('*');
+            return new UserDetailsDTO()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email.Substring(0,2)+"***",
+                BirthDate = user.BirthDate,
+                PublishedNews = user.PublishedNews,
+            };
+        }
     }
 }

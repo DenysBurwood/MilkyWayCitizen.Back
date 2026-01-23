@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MilkyWayCitizen.Back.API.DTOs;
 using MilkyWayCitizen.Back.API.Mappers;
 using MilkyWayCitizen.Back.API.Services;
+using MilkyWayCitizen.Back.API.Tools;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DL.Entities;
+using System.Security.Claims;
 
 namespace MilkyWayCitizen.Back.API.Controllers
 {
@@ -40,6 +43,20 @@ namespace MilkyWayCitizen.Back.API.Controllers
             }
             _userService.Register(form.ToUserFromUserFormDTO());
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("my_account")]
+        public ActionResult GetMyAccount() 
+        {
+            int id = User.GetUserID();
+            User? user = _userService.GetUserById(id);
+            if(user==null) 
+            {
+                throw new Exception();
+            }
+            UserDetailsDTO userDetails = user.ToUserDetailsDTOFromUser();
+            return Ok(userDetails);
         }
     }
 }

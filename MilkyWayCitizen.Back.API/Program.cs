@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MilkyWayCitizen.Back.API.Services;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DAL.Contexts;
@@ -14,7 +15,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer",new OpenApiSecurityScheme()
+    {           //  Ce sont les options s curitaires de base. La doc existe pour d'autres options sp cifiques au besoin.
+        Name="Authorization",
+        Type=SecuritySchemeType.ApiKey,
+        Scheme="Bearer",
+        BearerFormat="JWT",
+        In=ParameterLocation.Header,
+        Description="JWT Authorization: Entrez : 'Bearer [token]'"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {       //  Permet de rajouter un cadenas sur les routes
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference=new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 
 #region DbContext
 // Add DB Context
