@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MilkyWayCitizen.Back.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Verviers : Migration
+    public partial class Andromeda : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,11 +22,35 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                     LastName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false)
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    AddressID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Address_",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StreetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetNumber = table.Column<int>(type: "int", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Address__User__UserID",
+                        column: x => x.UserID,
+                        principalTable: "User_",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -55,6 +79,13 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Address__UserID",
+                table: "Address_",
+                column: "UserID",
+                unique: true,
+                filter: "[UserID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_News_UserId",
                 table: "News",
                 column: "UserId");
@@ -69,6 +100,9 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Address_");
+
             migrationBuilder.DropTable(
                 name: "News");
 

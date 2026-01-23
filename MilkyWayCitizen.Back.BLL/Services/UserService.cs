@@ -12,7 +12,7 @@ namespace MilkyWayCitizen.Back.BLL.Services
         {
             _userRepository=userRepository;
         }
-        public void Register(User user) 
+        public void Register(User user, Address address) 
         {
             if(_userRepository.GetUserByEmail(user.Email)!=null) 
             {
@@ -23,7 +23,8 @@ namespace MilkyWayCitizen.Back.BLL.Services
                 throw new Exception("UserName already registered");
             }
             user.Password = Argon2.Hash(user.Password);
-            _userRepository.Register(user);
+            _userRepository.Register(user, address);
+
         }
         public User Login(string username,string password) 
         {

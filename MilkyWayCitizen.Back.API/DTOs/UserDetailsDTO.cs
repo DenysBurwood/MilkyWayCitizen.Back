@@ -1,4 +1,5 @@
 ﻿using MilkyWayCitizen.Back.DL.Entities;
+using MilkyWayCitizen.Back.DL.Enums;
 
 namespace MilkyWayCitizen.Back.API.DTOs
 {
@@ -11,5 +12,8 @@ namespace MilkyWayCitizen.Back.API.DTOs
         public string Email { get; set; } = null!;
         public DateOnly BirthDate { get; set; }
         public List<News>? PublishedNews { get; set; }
+        public Roles Role { get; set; }
+        public int AddressID { get; set; }
+        public Address Address { get; set; } = null!;
     }
 }

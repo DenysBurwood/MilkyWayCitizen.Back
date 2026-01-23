@@ -11,6 +11,7 @@ namespace MilkyWayCitizen.Back.DAL.Configs
         {
             builder.ToTable("User_");
             builder.HasKey(u => u.Id).HasName("PK_User");
+            builder.Property(u => u.Id).UseIdentityColumn();
 
             builder.Property(u => u.UserName).IsRequired().HasMaxLength(32);
             builder.Property(u => u.FirstName).IsRequired().HasMaxLength(60);
@@ -22,6 +23,7 @@ namespace MilkyWayCitizen.Back.DAL.Configs
             //builder.Property(u => u.PublishedNews);
 
             builder.HasMany(u => u.PublishedNews).WithOne(n => n.Author);
+            builder.HasOne(u => u.Address).WithOne(a => a.User).HasForeignKey<Address>();
         }
     }
 }

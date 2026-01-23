@@ -25,7 +25,24 @@ namespace MilkyWayCitizen.Back.API.DTOs
         string Password,
 
         [Required]
-        DateOnly BirthDate
+        DateOnly BirthDate,
+
+        //  Address
+
+        [Required]
+        string StreetName,
+
+        [Required]
+        int StreetNumber,
+
+        [Required]
+        string City,
+
+        [Required]
+        string Country
+
+
+
     );
     //public class UserRegisterFormDTO
     //{

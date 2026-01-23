@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MilkyWayCitizen.Back.API.DTOs;
 using MilkyWayCitizen.Back.API.Mappers;
@@ -7,7 +6,6 @@ using MilkyWayCitizen.Back.API.Services;
 using MilkyWayCitizen.Back.API.Tools;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DL.Entities;
-using System.Security.Claims;
 
 namespace MilkyWayCitizen.Back.API.Controllers
 {
@@ -41,7 +39,7 @@ namespace MilkyWayCitizen.Back.API.Controllers
             {
                 throw new Exception("Null form...");
             }
-            _userService.Register(form.ToUserFromUserFormDTO());
+            _userService.Register(form.ToUserFromUserRegisterDTO(), form.ToAddressFromUserRegisterDTO());
             return Ok();
         }
 

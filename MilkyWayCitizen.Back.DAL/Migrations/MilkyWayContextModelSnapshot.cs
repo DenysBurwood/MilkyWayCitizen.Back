@@ -22,6 +22,42 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.Address", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StreetNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID")
+                        .HasName("PK_Address");
+
+                    b.HasIndex("UserID")
+                        .IsUnique()
+                        .HasFilter("[UserID] IS NOT NULL");
+
+                    b.ToTable("Address_", (string)null);
+                });
+
             modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.News", b =>
                 {
                     b.Property<int>("Id")
@@ -72,6 +108,9 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AddressID")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("BirthDate")
                         .HasColumnType("date");
 
@@ -93,6 +132,9 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -105,6 +147,15 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("User_", (string)null);
+                });
+
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.Address", b =>
+                {
+                    b.HasOne("MilkyWayCitizen.Back.DL.Entities.User", "User")
+                        .WithOne("Address")
+                        .HasForeignKey("MilkyWayCitizen.Back.DL.Entities.Address", "UserID");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.News", b =>
@@ -120,6 +171,9 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
 
             modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.User", b =>
                 {
+                    b.Navigation("Address")
+                        .IsRequired();
+
                     b.Navigation("PublishedNews");
                 });
 #pragma warning restore 612, 618
