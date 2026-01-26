@@ -20,12 +20,12 @@ namespace MilkyWayCitizen.Back.API.Services
 
             List<Claim> claims = new List<Claim>(){
                     new Claim(ClaimTypes.Sid, user.Id.ToString()),
-                    //new Claim(ClaimTypes.Role, employee is null ? "Client" : employee.EmployeeType.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.ToString()),
                     new Claim(ClaimTypes.DateOfBirth, user.BirthDate.ToString()),
                     //new Claim(ClaimTypes.Name, user.FirstName),
                     //new Claim(ClaimTypes.Upn, user.LastName),
                 };
-
+            Console.WriteLine(user.Role.ToString());
             string secretKey = _config["Jwt:Key"];
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             SigningCredentials creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);

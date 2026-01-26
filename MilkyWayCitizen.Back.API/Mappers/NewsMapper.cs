@@ -13,7 +13,7 @@ namespace MilkyWayCitizen.Back.API.Mappers
                 Title = news.Title,
                 Picture = news.Pictures.First(),//[0],
                 Tags = news.Tags,
-                Description = news.Description.Length<100 ? news.Description : "Lorem Ipsum",
+                Description = news.Description//.Length<100 ? news.Description : "Lorem Ipsum",
                 //  Not here it's supposed to happen. The 'description' field must be created before the news is saved.
             };
         }

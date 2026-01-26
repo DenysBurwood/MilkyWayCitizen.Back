@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using MilkyWayCitizen.Back.DAL.Repositories;
 using MilkyWayCitizen.Back.DL.Entities;
 
@@ -22,7 +23,7 @@ namespace MilkyWayCitizen.Back.BLL.Services
             return _news.GetOneNews(id);
         }
 
-
+        //[Authorize(Roles = "Admin")]
         public void AddNews(News news) 
         {
             news.Author=_user.GetUserById(news.UserId)!;  //  Check afterwards how to handle no user found

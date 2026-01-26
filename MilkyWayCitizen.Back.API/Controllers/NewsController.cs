@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MilkyWayCitizen.Back.API.DTOs;
 using MilkyWayCitizen.Back.API.Mappers;
+using MilkyWayCitizen.Back.API.Tools;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DL.Entities;
 
@@ -22,6 +24,10 @@ namespace MilkyWayCitizen.Back.API.Controllers
         public ActionResult NewsIndex() 
         {
             List<NewsIndexDTO> articles = _newsService.GetNews().Select(n => n.ToNewsIndexDTOFromNews()).ToList();
+            foreach(NewsIndexDTO article in articles) 
+            {
+                Console.WriteLine("description = " + article.Description);
+            }
             return Ok(articles);
         }
 
@@ -46,11 +52,13 @@ namespace MilkyWayCitizen.Back.API.Controllers
             return Ok(newsDetails);
         }
 
+        [Authorize(Roles ="admin,moderator")]
         [HttpPost("add")]
         public ActionResult AddNews([FromBody] NewsFormDTO news) 
         {
-            Console.Write("\nPublishTime : ");
-            Console.WriteLine(news.PublishTime);
+            //Console.Write("\nPublishTime : ");
+            //Console.WriteLine(news.PublishTime);
+            news.UserId=User.GetUserID();
             _newsService.AddNews(news.ToNewsFromNewsFormDTO());
             return Ok();
         }
