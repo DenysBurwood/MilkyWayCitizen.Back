@@ -1,4 +1,5 @@
 ﻿using MilkyWayCitizen.Back.API.DTOs;
+using MilkyWayCitizen.Back.API.Tools;
 using MilkyWayCitizen.Back.DL.Entities;
 
 namespace MilkyWayCitizen.Back.API.Mappers
@@ -14,7 +15,7 @@ namespace MilkyWayCitizen.Back.API.Mappers
                 LastName = form.LastName,
                 Email = form.Email,
                 Password = form.Password,
-                BirthDate = form.BirthDate,
+                BirthDate = form.BirthDate.DateTimeToDateOnly(),
             };
         }
         public static Address ToAddressFromUserRegisterDTO(this UserRegisterFormDTO form) 

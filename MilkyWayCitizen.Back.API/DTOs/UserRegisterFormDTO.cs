@@ -25,7 +25,7 @@ namespace MilkyWayCitizen.Back.API.DTOs
         string Password,
 
         [Required]
-        DateOnly BirthDate,
+        DateTime BirthDate,
 
         //  Address
 

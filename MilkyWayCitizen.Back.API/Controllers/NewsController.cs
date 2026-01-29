@@ -56,9 +56,11 @@ namespace MilkyWayCitizen.Back.API.Controllers
         [HttpPost("add")]
         public ActionResult AddNews([FromBody] NewsFormDTO news) 
         {
+            //  Publish time is lost in the body
             //Console.Write("\nPublishTime : ");
             //Console.WriteLine(news.PublishTime);
             news.UserId=User.GetUserID();
+            //throw new Exception("stop temporaire");
             _newsService.AddNews(news.ToNewsFromNewsFormDTO());
             return Ok();
         }

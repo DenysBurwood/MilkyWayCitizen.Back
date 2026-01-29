@@ -19,5 +19,9 @@ namespace MilkyWayCitizen.Back.API.Tools
         {
             return claim.FindFirst(ClaimTypes.Role)!.Value;
         }
+        public static DateOnly DateTimeToDateOnly(this DateTime date) 
+        {
+            return new DateOnly(date.Year, date.Month, date.Day);
+        }
     }
 }
