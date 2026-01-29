@@ -16,13 +16,6 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
         }
         public List<News> GetNews() 
         {
-            Console.WriteLine("------    Test important !    --------");
-            foreach(var item in _news)
-            {
-                Console.WriteLine(item.Pictures);
-            }
-            //Console.WriteLine(_news.First(u => u.UserId==1));
-            Console.WriteLine("------    Fin test important !    -----");
             return _news.OrderBy(n => EF.Property<News>(n,"Id")).ToList();
         }
         public News? GetOneNews(int id) 

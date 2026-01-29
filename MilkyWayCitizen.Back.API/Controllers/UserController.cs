@@ -7,7 +7,6 @@ using MilkyWayCitizen.Back.API.Services;
 using MilkyWayCitizen.Back.API.Tools;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DL.Entities;
-using System.Security.Claims;
 
 namespace MilkyWayCitizen.Back.API.Controllers
 {

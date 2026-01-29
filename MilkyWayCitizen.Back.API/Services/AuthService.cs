@@ -20,10 +20,7 @@ namespace MilkyWayCitizen.Back.API.Services
 
             List<Claim> claims = new List<Claim>(){
                     new Claim(ClaimTypes.Sid, user.Id.ToString()),
-                    //new Claim(ClaimTypes.Role, employee is null ? "Client" : employee.EmployeeType.ToString()),
                     new Claim(ClaimTypes.DateOfBirth, user.BirthDate.ToString()),
-                    //new Claim(ClaimTypes.Name, user.FirstName),
-                    //new Claim(ClaimTypes.Upn, user.LastName),
                 };
 
             string secretKey = _config["Jwt:Key"];

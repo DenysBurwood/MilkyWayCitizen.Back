@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MilkyWayCitizen.Back.DAL.Contexts;
 using MilkyWayCitizen.Back.DL.Entities;
 

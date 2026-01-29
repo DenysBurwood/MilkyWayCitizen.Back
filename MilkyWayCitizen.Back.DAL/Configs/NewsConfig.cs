@@ -15,7 +15,6 @@ namespace MilkyWayCitizen.Back.DAL.Configs
             builder.Property(n => n.Description).IsRequired();
             builder.Property(n => n.Text).IsRequired();
             builder.Property(n => n.UserId).IsRequired();
-            //builder.Property(n => n.Author).IsRequired();
             builder.Property(n => n.Pictures);
             builder.Property(n => n.PublishTime).IsRequired();
             builder.Property(n => n.Tags).IsRequired();

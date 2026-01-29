@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net;
 
 namespace MilkyWayCitizen.Back.API.DTOs
 {
@@ -27,13 +26,5 @@ namespace MilkyWayCitizen.Back.API.DTOs
         [Required]
         DateOnly BirthDate
     );
-    //public class UserRegisterFormDTO
-    //{
-    //    public string FirstName { get; set; } = null!;
-    //    public string LastName { get; set; } = null!;
-    //    public string Email { get; set; } = null!;
-    //    public string Password { get; set; } = null!;
-    //    public DateOnly BirthDate { get; set; }
-    //    //public Address? Address { get; set; }
-    //}
+
 }

@@ -34,15 +34,12 @@ namespace MilkyWayCitizen.Back.API.Controllers
                 throw new Exception("No such title found£...");
             }
             NewsDetailsDTO newsDetails = news.ToNewsDetailsDTOFromNews();
-            Console.WriteLine("UserId : " + newsDetails.AuthorId);
-            Console.WriteLine("Photos : " + newsDetails.Pictures);
             User? author = _userService.GetUserById(news.UserId);
             if(author==null)
             {
                 throw new Exception("Author not found");
             }
             newsDetails.AuthorName=author.UserName;
-            //news.Author=author;
             return Ok(newsDetails);
         }
 

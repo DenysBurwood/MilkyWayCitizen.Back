@@ -19,7 +19,6 @@ namespace MilkyWayCitizen.Back.DAL.Configs
             builder.HasIndex(u => u.Email).IsUnique();
             builder.Property(u => u.Password).IsRequired();
             builder.Property(u => u.BirthDate).IsRequired();
-            //builder.Property(u => u.PublishedNews);
 
             builder.HasMany(u => u.PublishedNews).WithOne(n => n.Author);
         }
