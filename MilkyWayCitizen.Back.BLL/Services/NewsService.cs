@@ -14,9 +14,9 @@ namespace MilkyWayCitizen.Back.BLL.Services
             _user = user;
             _news = news;
         }
-        public List<News> GetNews() 
+        public List<News> GetNews(int pageNumber, int pageSize,string[]? tags) 
         {
-            return _news.GetNews();
+            return _news.GetNews(pageNumber, pageSize, tags);
         }
         public News? GetOneNews(int id) 
         {

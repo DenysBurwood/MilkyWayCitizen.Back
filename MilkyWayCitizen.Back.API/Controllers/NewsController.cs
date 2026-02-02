@@ -21,12 +21,14 @@ namespace MilkyWayCitizen.Back.API.Controllers
         }
 
          [HttpGet("index")]
-        public ActionResult NewsIndex() 
+        public ActionResult NewsIndex([FromQuery] int pageSize=10,[FromQuery] int pageNumber = 0,[FromQuery] string[]? tags=null) 
         {
-            List<NewsIndexDTO> articles = _newsService.GetNews().Select(n => n.ToNewsIndexDTOFromNews()).ToList();
-            foreach(NewsIndexDTO article in articles) 
+            List<NewsIndexDTO> articles = _newsService.GetNews(pageNumber, pageSize, tags).Select(n => n.ToNewsIndexDTOFromNews()).ToList();
+            Console.WriteLine("page size : " + pageSize);
+            Console.WriteLine("page number" + pageNumber);
+            if(tags!=null) 
             {
-                Console.WriteLine("description = " + article.Description);
+                Console.WriteLine("tags" + tags.Length);
             }
             return Ok(articles);
         }

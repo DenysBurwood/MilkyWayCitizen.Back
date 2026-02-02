@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MilkyWayCitizen.Back.DAL.Contexts;
 using MilkyWayCitizen.Back.DL.Entities;
+using System.Linq;
 
 namespace MilkyWayCitizen.Back.DAL.Repositories
 {
@@ -14,16 +15,19 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
             _news=context.News;
             _context = context;
         }
-        public List<News> GetNews() 
+        public List<News> GetNews(int pageNumber, int pageSize,string[]? tags) 
         {
-            Console.WriteLine("------    Test important !    --------");
-            foreach(var item in _news)
+            List<News> selectedNews = _news.OrderBy(n => EF.Property<News>(n,"Id")).ToList();
+            if(tags!=null) 
             {
-                Console.WriteLine(item.Pictures);
+                foreach(string tag in tags) 
+                {
+                    selectedNews = selectedNews.FindAll(article => article.Tags.Contains(tag)).ToList();
+                    Console.WriteLine("bouclette");
+                }
             }
-            //Console.WriteLine(_news.First(u => u.UserId==1));
-            Console.WriteLine("------    Fin test important !    -----");
-            return _news.OrderBy(n => EF.Property<News>(n,"Id")).ToList();
+            selectedNews=selectedNews.Skip(pageSize*pageNumber).Take(pageSize).ToList();
+            return selectedNews;
         }
         public News? GetOneNews(int id) 
         {
