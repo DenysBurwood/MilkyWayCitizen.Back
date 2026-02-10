@@ -23,7 +23,6 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
                 foreach(string tag in tags) 
                 {
                     selectedNews = selectedNews.FindAll(article => article.Tags.Contains(tag)).ToList();
-                    Console.WriteLine("bouclette");
                 }
             }
             selectedNews=selectedNews.Skip(pageSize*pageNumber).Take(pageSize).ToList();
@@ -39,6 +38,21 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
         {
             _news.Add(news);
             _context.SaveChanges();
+        }
+
+        public int NumberPageMax(int pageSize,string[]? tags) 
+        {
+            List<News> selectedNews = _news.OrderBy(n => EF.Property<News>(n,"Id")).ToList();
+            if(tags!=null)
+            {
+                foreach(string tag in tags)
+                {
+                    selectedNews=selectedNews.FindAll(article => article.Tags.Contains(tag)).ToList();
+                }
+            }
+            Console.WriteLine(selectedNews);
+            Console.WriteLine(selectedNews.Count);
+            return selectedNews.Count;
         }
     }
 }

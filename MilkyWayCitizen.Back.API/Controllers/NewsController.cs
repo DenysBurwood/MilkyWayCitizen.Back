@@ -20,17 +20,12 @@ namespace MilkyWayCitizen.Back.API.Controllers
             _userService=userService;
         }
 
-         [HttpGet("index")]
-        public ActionResult NewsIndex([FromQuery] int pageSize=10,[FromQuery] int pageNumber = 0,[FromQuery] string[]? tags=null) 
+        [HttpGet("index")]
+        public ActionResult NewsIndex([FromQuery] int pageSize = 10,[FromQuery] int pageNumber = 0,[FromQuery] string[]? tags = null)
         {
-            List<NewsIndexDTO> articles = _newsService.GetNews(pageNumber, pageSize, tags).Select(n => n.ToNewsIndexDTOFromNews()).ToList();
-            Console.WriteLine("page size : " + pageSize);
-            Console.WriteLine("page number" + pageNumber);
-            if(tags!=null) 
-            {
-                Console.WriteLine("tags" + tags.Length);
-            }
-            return Ok(articles);
+            List<NewsIndexDTO> articles = _newsService.GetNews(pageNumber,pageSize,tags).Select(n => n.ToNewsIndexDTOFromNews()).ToList();
+            NewsIndexPageMaxDTO groupArticles = new NewsIndexPageMaxDTO(articles,(int)(Math.Ceiling(1.0*_newsService.NumberPageMax(pageSize,tags)/pageSize)));
+            return Ok(groupArticles);
         }
 
         [HttpGet("details/{id}")]
@@ -42,8 +37,6 @@ namespace MilkyWayCitizen.Back.API.Controllers
                 throw new Exception("No such title found£...");
             }
             NewsDetailsDTO newsDetails = news.ToNewsDetailsDTOFromNews();
-            Console.WriteLine("UserId : " + newsDetails.AuthorId);
-            Console.WriteLine("Photos : " + newsDetails.Pictures);
             User? author = _userService.GetUserById(news.UserId);
             if(author==null)
             {
@@ -65,6 +58,24 @@ namespace MilkyWayCitizen.Back.API.Controllers
             //throw new Exception("stop temporaire");
             _newsService.AddNews(news.ToNewsFromNewsFormDTO());
             return Ok();
+        }
+
+        [HttpGet("pageNumberMax")]
+        public ActionResult NumberPageMax([FromQuery] int pageSize,[FromQuery] string[]? tags) 
+        {
+            if(tags!=null) 
+            {
+                if(tags.Length>0) 
+                {
+                    Console.WriteLine(tags[0]);
+                    if(tags.Length>1) 
+                    {
+                        Console.WriteLine(tags[1]);
+                    }
+                }
+            
+            }
+            return Ok(_newsService.NumberPageMax(pageSize,tags));
         }
     }
 }

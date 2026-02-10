@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using MilkyWayCitizen.Back.DAL.Repositories;
 using MilkyWayCitizen.Back.DL.Entities;
+using System.Formats.Asn1;
 
 namespace MilkyWayCitizen.Back.BLL.Services
 {
@@ -28,6 +29,10 @@ namespace MilkyWayCitizen.Back.BLL.Services
         {
             news.Author=_user.GetUserById(news.UserId)!;  //  Check afterwards how to handle no user found
             _news.AddNews(news);
+        }
+        public int NumberPageMax(int pageSize,string[]? tags) 
+        {
+            return _news.NumberPageMax(pageSize,tags);
         }
     }
 }

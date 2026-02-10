@@ -72,6 +72,7 @@ builder.Services.AddAuthentication(option =>
         ValidateIssuerSigningKey=true,
         IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
         ValidateLifetime=true,
+        //LifetimeValidator(DateTime.Now(),DateTime.Now.AddDays(1), token)
 
         //  Optionnel mais un peu utile
         ValidateAudience=true,
