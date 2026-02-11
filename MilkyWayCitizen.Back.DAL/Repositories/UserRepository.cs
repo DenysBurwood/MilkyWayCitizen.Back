@@ -9,12 +9,14 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
     {
         private readonly DbSet<User> _users;
         private readonly DbSet<Address> _addresses;
+        private readonly DbSet<UserArchive> _userArchive;
         private readonly MilkyWayContext _milkyWay;
         public UserRepository(MilkyWayContext context) 
         {
             _milkyWay=context;
             _users=context.Users;
             _addresses=context.Addresses;
+            _userArchive=context.UserArchives;
         }
         public void Register(User user, Address address) 
         {
@@ -28,6 +30,13 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
             _users.Update(user);
             _milkyWay.SaveChanges();
 
+        }
+
+        public void Delete(User user) 
+        {
+            _users.Remove(user);
+            _userArchive.Add(FromUserToUserArchive(user));
+            _milkyWay.SaveChanges();
         }
         public bool IsUserUnique(string Email,string UserName) 
         {
@@ -91,6 +100,19 @@ namespace MilkyWayCitizen.Back.DAL.Repositories
                 id=address.ID;
             }
             return id;
+        }
+
+        public UserArchive FromUserToUserArchive(User user)
+        {
+            return new UserArchive()
+            {
+                UserId=user.Id,
+                UserName=user.UserName,
+                FirstName=user.FirstName,
+                LastName=user.LastName,
+                Email=user.Email,
+                BirthDate=user.BirthDate
+            };
         }
     }
 }

@@ -43,7 +43,6 @@ namespace MilkyWayCitizen.Back.API.Controllers
                 throw new Exception("Author not found");
             }
             newsDetails.AuthorName=author.UserName;
-            //news.Author=author;
             return Ok(newsDetails);
         }
 
@@ -51,11 +50,7 @@ namespace MilkyWayCitizen.Back.API.Controllers
         [HttpPost("add")]
         public ActionResult AddNews([FromBody] NewsFormDTO news) 
         {
-            //  Publish time is lost in the body
-            //Console.Write("\nPublishTime : ");
-            //Console.WriteLine(news.PublishTime);
             news.UserId=User.GetUserID();
-            //throw new Exception("stop temporaire");
             _newsService.AddNews(news.ToNewsFromNewsFormDTO());
             return Ok();
         }
@@ -63,18 +58,6 @@ namespace MilkyWayCitizen.Back.API.Controllers
         [HttpGet("pageNumberMax")]
         public ActionResult NumberPageMax([FromQuery] int pageSize,[FromQuery] string[]? tags) 
         {
-            if(tags!=null) 
-            {
-                if(tags.Length>0) 
-                {
-                    Console.WriteLine(tags[0]);
-                    if(tags.Length>1) 
-                    {
-                        Console.WriteLine(tags[1]);
-                    }
-                }
-            
-            }
             return Ok(_newsService.NumberPageMax(pageSize,tags));
         }
     }

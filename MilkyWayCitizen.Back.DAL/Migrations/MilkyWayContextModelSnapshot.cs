@@ -58,6 +58,30 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                     b.ToTable("Address_", (string)null);
                 });
 
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.Error", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeError")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Errors");
+
+                    b.ToTable("Errors", (string)null);
+                });
+
             modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.News", b =>
                 {
                     b.Property<int>("Id")
@@ -147,6 +171,38 @@ namespace MilkyWayCitizen.Back.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("User_", (string)null);
+                });
+
+            modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.UserArchive", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateOnly?>("BirthDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_UserArchive");
+
+                    b.ToTable("UserArchive", (string)null);
                 });
 
             modelBuilder.Entity("MilkyWayCitizen.Back.DL.Entities.Address", b =>

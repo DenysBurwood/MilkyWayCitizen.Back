@@ -4,6 +4,7 @@ using MilkyWayCitizen.Back.API.DTOs;
 using MilkyWayCitizen.Back.API.Mappers;
 using MilkyWayCitizen.Back.API.Services;
 using MilkyWayCitizen.Back.API.Tools;
+using MilkyWayCitizen.Back.BLL.Exceptions;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DL.Entities;
 
@@ -55,6 +56,32 @@ namespace MilkyWayCitizen.Back.API.Controllers
             }
             UserDetailsDTO userDetails = user.ToUserDetailsDTOFromUser();
             return Ok(userDetails);
+        }
+
+        [Authorize]
+        [HttpDelete("Delete")]
+        public ActionResult DeleteOwnAccount(string password) 
+        {
+            bool completion = false ;
+            //if(userDelete is null)
+            //{
+            //    throw new UserNotFoundException();
+            //}
+            if(string.IsNullOrEmpty(password))
+            {
+                throw new RegisterFormException("No password received...");
+            }
+            User? user = _userService.GetUserById(User.GetUserID());
+            //string email = _userService.GetUserById(User.GetUserID())!.Email;
+            if(user is not null) 
+            {
+                completion=_userService.CheckPassword(User.GetUserID(),password);
+                if(completion)
+                {
+                    _userService.Delete(user);
+                }
+            }
+            return Ok(completion);
         }
     }
 }

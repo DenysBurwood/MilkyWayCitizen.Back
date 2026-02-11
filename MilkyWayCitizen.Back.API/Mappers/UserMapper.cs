@@ -62,5 +62,18 @@ namespace MilkyWayCitizen.Back.API.Mappers
                 AddressID = user.AddressID,
             };
         }
+
+        public static UserArchive FromUserToUserArchive(this User user) 
+        {
+            return new UserArchive() 
+            {
+                Id=user.Id,
+                UserName=user.UserName,
+                FirstName=user.FirstName,
+                LastName=user.LastName,
+                Email = user.Email,
+                BirthDate=user.BirthDate
+            };
+        }
     }
 }

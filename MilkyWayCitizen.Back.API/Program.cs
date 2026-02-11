@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MilkyWayCitizen.Back.API.Middlewares;
 using MilkyWayCitizen.Back.API.Services;
 using MilkyWayCitizen.Back.BLL.Services;
 using MilkyWayCitizen.Back.DAL.Contexts;
@@ -109,6 +110,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("FFA");
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 
